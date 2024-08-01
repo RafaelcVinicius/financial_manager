@@ -30,7 +30,7 @@ describe('FinanceRepository Integration Test', () => {
     expect(entity.toJSON()).toStrictEqual(entityFound!.toJSON());
   });
 
-  it('should return all categories', async () => {
+  it('should return all finances', async () => {
     const entity = FinanceEntity.mock();
     await repository.store(entity);
     const entities = await repository.findAll();

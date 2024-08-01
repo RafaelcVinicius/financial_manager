@@ -1,6 +1,5 @@
 import { Entity } from '../../../domain/entity';
-import { InvalidArgumentError } from '../../../domain/errors/invalid-argument.error';
-import { NotFoundError } from '../../../domain/errors/not-found.error';
+import { NotFoundError } from '../../../domain/error/not-found.error';
 import {
   IRepository,
   ISearchableRepository,
@@ -19,75 +18,35 @@ export abstract class InMemoryRepository<
 {
   items: E[] = [];
 
-  async insert(entity: E): Promise<void> {
+  async store(entity: E): Promise<void> {
     this.items.push(entity);
-  }
-  async bulkInsert(entities: any[]): Promise<void> {
-    this.items.push(...entities);
   }
 
   async update(entity: E): Promise<void> {
     const indexFound = this.items.findIndex((item) =>
-      item.entity_id.equals(entity.entity_id),
+      item.id.equals(entity.id)
     );
     if (indexFound === -1) {
-      throw new NotFoundError(entity.entity_id, this.getEntity());
+      throw new NotFoundError(entity.id, this.getEntity());
     }
     this.items[indexFound] = entity;
   }
 
-  async delete(entity_id: EntityId): Promise<void> {
-    const indexFound = this.items.findIndex((item) =>
-      item.entity_id.equals(entity_id),
-    );
+  async delete(id: EntityId): Promise<void> {
+    const indexFound = this.items.findIndex((item) => item.id.equals(id));
     if (indexFound === -1) {
-      throw new NotFoundError(entity_id, this.getEntity());
+      throw new NotFoundError(id, this.getEntity());
     }
     this.items.splice(indexFound, 1);
-  }
-
-  async findById(entity_id: EntityId): Promise<E | null> {
-    const item = this.items.find((item) => item.entity_id.equals(entity_id));
-    return typeof item === 'undefined' ? null : item;
   }
 
   async findAll(): Promise<any[]> {
     return this.items;
   }
 
-  async findByIds(ids: EntityId[]): Promise<E[]> {
-    //avoid to return repeated items
-    return this.items.filter((entity) => {
-      return ids.some((id) => entity.entity_id.equals(id));
-    });
-  }
-
-  async existsById(
-    ids: EntityId[],
-  ): Promise<{ exists: EntityId[]; not_exists: EntityId[] }> {
-    if (!ids.length) {
-      throw new InvalidArgumentError(
-        'ids must be an array with at least one element',
-      );
-    }
-
-    if (this.items.length === 0) {
-      return {
-        exists: [],
-        not_exists: ids,
-      };
-    }
-
-    const existsId = new Set<EntityId>();
-    const notExistsId = new Set<EntityId>();
-    ids.forEach((id) => {
-      const item = this.items.find((entity) => entity.entity_id.equals(id));
-      item ? existsId.add(id) : notExistsId.add(id);
-    });
-    return {
-      exists: Array.from(existsId.values()),
-      not_exists: Array.from(notExistsId.values()),
-    };
+  async findById(id: EntityId): Promise<E | null> {
+    const item = this.items.find((item) => item.id.equals(id));
+    return typeof item === 'undefined' ? null : item;
   }
 
   abstract getEntity(): new (...args: any[]) => E;
@@ -107,12 +66,12 @@ export abstract class InMemorySearchableRepository<
     const itemsSorted = this.applySort(
       itemsFiltered,
       props.sort,
-      props.sort_dir,
+      props.sort_dir
     );
     const itemsPaginated = this.applyPaginate(
       itemsSorted,
       props.page,
-      props.per_page,
+      props.per_page
     );
     return new SearchResult({
       items: itemsPaginated,
@@ -124,13 +83,13 @@ export abstract class InMemorySearchableRepository<
 
   protected abstract applyFilter(
     items: E[],
-    filter: Filter | null,
+    filter: Filter | null
   ): Promise<E[]>;
 
   protected applyPaginate(
     items: E[],
     page: SearchParams['page'],
-    per_page: SearchParams['per_page'],
+    per_page: SearchParams['per_page']
   ) {
     const start = (page - 1) * per_page; // 0 * 15 = 0
     const limit = start + per_page; // 0 + 15 = 15
@@ -141,7 +100,7 @@ export abstract class InMemorySearchableRepository<
     items: E[],
     sort: string | null,
     sort_dir: SortDirection | null,
-    custom_getter?: (sort: string, item: E) => any,
+    custom_getter?: (sort: string, item: E) => any
   ) {
     if (!sort || !this.sortableFields.includes(sort)) {
       return items;

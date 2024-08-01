@@ -16,8 +16,6 @@ export class FinanceRepository implements IFinanceRepository {
 
   async store(entity: FinanceEntity): Promise<void> {
     const modelProps = FinanceModelMapper.toModel(entity);
-    console.log(modelProps);
-
     await this.model.create(modelProps);
   }
 

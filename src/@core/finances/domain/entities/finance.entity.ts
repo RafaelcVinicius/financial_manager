@@ -45,7 +45,6 @@ export class FinanceEntity extends Entity {
       value: this.value,
       created_at: this.created_at,
       updated_at: this.created_at,
-      deleted_at: this.deleted_at,
     };
   }
 }
