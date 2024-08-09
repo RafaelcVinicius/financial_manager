@@ -1,24 +1,19 @@
 import { join } from 'path';
 import { Sequelize } from 'sequelize';
-import { SequelizeStorage, Umzug, UmzugOptions } from 'umzug';
+import { SequelizeStorage, Umzug } from 'umzug';
 
-export function migrator(
-  sequelize: Sequelize,
-  options?: Partial<UmzugOptions>,
-) {
+export function migrator(sequelize: Sequelize) {
   return new Umzug({
     migrations: {
       glob: [
-        '*/infra/db/sequelize/migrations/*.{js,ts}',
+        './migrations/*.{js,ts}',
         {
-          cwd: join(__dirname, '..', '..', '..', '..'),
-          ignore: ['**/*.d.ts', '**/index.ts', '**/index.js'],
+          cwd: join(__dirname, '.'),
         },
       ],
     },
     context: sequelize,
     storage: new SequelizeStorage({ sequelize }),
     logger: console,
-    ...(options || {}),
   });
 }

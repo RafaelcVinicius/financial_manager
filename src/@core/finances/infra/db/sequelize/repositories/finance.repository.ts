@@ -8,11 +8,15 @@ import { FinanceModelMapper } from '../models/finance.model.mapper';
 import FinanceModel from '../models/finance.model';
 import { NotFoundError } from '../../../../../@shared/domain/error/not-found.error';
 import { Uuid } from '../../../../../@shared/domain/value-objects/uuid.vo';
+import { UnitOfWorkSequelize } from '../../../../../@shared/infra/db/sequelize/unit-of-work-sequelize';
 
 export class FinanceRepository implements IFinanceRepository {
   sortableFields: string[] = ['name', 'created_at'];
 
-  constructor(private model: typeof FinanceModel) {}
+  constructor(
+    private uow: UnitOfWorkSequelize,
+    private model: typeof FinanceModel
+  ) {}
 
   async store(entity: FinanceEntity): Promise<void> {
     const modelProps = FinanceModelMapper.toModel(entity);
