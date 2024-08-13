@@ -3,7 +3,7 @@ import { ApplicationService } from '../../@core/@shared/application/application.
 import { FinanceRepository } from '../../@core/finances/infra/db/sequelize/repositories/finance.repository';
 import { UnitOfWorkSequelize } from '../../@core/@shared/infra/db/sequelize/unit-of-work-sequelize';
 import FinanceModel from '../../@core/finances/infra/db/sequelize/models/finance.model';
-import { StoreFinanceUseCase } from '../../@core/finances/application/use-case/store/store-finance.use-case';
+import { StoreFinanceUseCase } from '../../@core/finances/application/use-case/create-finance/store-finance.use-case';
 import { IFinanceRepository } from '../../@core/finances/domain/contracts/finance.interface';
 
 export const REPOSITORIES = {

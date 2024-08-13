@@ -18,7 +18,7 @@ export abstract class InMemoryRepository<
 {
   items: E[] = [];
 
-  async store(entity: E): Promise<void> {
+  async create(entity: E): Promise<void> {
     this.items.push(entity);
   }
 

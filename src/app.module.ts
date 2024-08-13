@@ -6,11 +6,13 @@ import { ConfigModule } from './nest-modules/config-module/config.module';
 import { DatabaseModule } from './nest-modules/database-module/database.module';
 import { MigrationsModule } from './nest-modules/database-module/migrations.module';
 import { SharedModule } from './nest-modules/shared-module/shared.module';
-import { EventsModule } from './nest-modules/events_module/events.module';
+import { EventsModule } from './nest-modules/events-module/events.module';
+import { RoutersModule } from './nest-modules/routers-module/routers.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    RoutersModule.register(),
     FinancesModule,
     DatabaseModule,
     MigrationsModule,

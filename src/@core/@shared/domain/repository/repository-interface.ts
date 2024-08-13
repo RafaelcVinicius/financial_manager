@@ -4,7 +4,7 @@ import { SearchParams } from './search-params';
 import { SearchResult } from './search-result';
 
 export interface IRepository<E extends Entity, EntityId extends ValueObject> {
-  store(entity: E): Promise<void>;
+  create(entity: E): Promise<void>;
   update(entity: E): Promise<void>;
   delete(entity_id: EntityId): Promise<void>;
   findById(entity_id: EntityId): Promise<E | null>;

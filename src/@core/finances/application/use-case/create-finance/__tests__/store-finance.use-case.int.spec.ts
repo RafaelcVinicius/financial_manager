@@ -1,4 +1,8 @@
+import EventEmitter2 from 'eventemitter2';
+import { ApplicationService } from '../../../../../@shared/application/application.service';
+import { DomainEventMediator } from '../../../../../@shared/domain/events/domain-event-mediator';
 import { Uuid } from '../../../../../@shared/domain/value-objects/uuid.vo';
+import { UnitOfWorkSequelize } from '../../../../../@shared/infra/db/sequelize/unit-of-work-sequelize';
 import { setupSequelize } from '../../../../../@shared/infra/testing/helpers';
 import FinanceModel from '../../../../infra/db/sequelize/models/finance.model';
 import { FinanceRepository } from '../../../../infra/db/sequelize/repositories/finance.repository';
@@ -8,11 +12,15 @@ describe('StoreFinanceUseCase Integration Tests', () => {
   let useCase: StoreFinanceUseCase;
   let repository: FinanceRepository;
 
-  setupSequelize({ models: [FinanceModel] });
+  const setup = setupSequelize({ models: [FinanceModel] });
 
-  beforeEach(() => {
-    repository = new FinanceRepository(FinanceModel);
-    useCase = new StoreFinanceUseCase(repository);
+  beforeAll(() => {
+    const uow = new UnitOfWorkSequelize(setup.sequelize);
+    const domainEvent = new DomainEventMediator(new EventEmitter2());
+    const app = new ApplicationService(uow, domainEvent);
+
+    repository = new FinanceRepository(uow, FinanceModel);
+    useCase = new StoreFinanceUseCase(app, repository);
   });
 
   it('should create a finance', async () => {

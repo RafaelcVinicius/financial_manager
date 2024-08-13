@@ -25,7 +25,7 @@ export class StoreFinanceUseCase
         throw new EntityValidationError(entity.notification.toJSON());
       }
 
-      await this._financeRepo.store(entity);
+      await this._financeRepo.create(entity);
 
       return FinanceOutputMapper.toOutput(entity);
     });
