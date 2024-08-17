@@ -1,7 +1,7 @@
-import { setupSequelize } from '../../../../../@shared/infra/testing/helpers';
-import { FinanceEntity } from '../../../../domain/entities/finance.entity';
-import FinanceModel from './finance.model';
-import { FinanceModelMapper } from './finance.model.mapper';
+import { setupSequelize } from '../../../../../../@shared/infra/testing/helpers';
+import { FinanceEntity } from '../../../../../domain/entities/finance.entity';
+import FinanceModel from '../finance.model';
+import { FinanceModelMapper } from '../finance.model.mapper';
 
 describe('Finance model mapper tests', () => {
   setupSequelize();

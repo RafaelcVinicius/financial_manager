@@ -25,9 +25,9 @@ const models = [FinanceModel];
           };
         }
 
-        if (dbVendor === 'mysql') {
+        if (dbVendor === 'postgres') {
           return {
-            dialect: 'mysql',
+            dialect: 'postgres',
             host: configService.get('DB_HOST'),
             port: configService.get('DB_PORT'),
             database: configService.get('DB_DATABASE'),

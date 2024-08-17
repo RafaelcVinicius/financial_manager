@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { Entity } from '../../../@shared/domain/entity';
 import { Uuid } from '../../../@shared/domain/value-objects/uuid.vo';
 
@@ -44,7 +45,13 @@ export class FinanceEntity extends Entity {
       id: this.id.value,
       value: this.value,
       created_at: this.created_at,
-      updated_at: this.created_at,
+      updated_at: this.updated_at,
     };
+  }
+
+  changeValue(value: number) {
+    if (!value) throw new BadRequestException();
+
+    this.value = value;
   }
 }

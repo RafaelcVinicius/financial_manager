@@ -13,10 +13,10 @@ import { RoutersModule } from './nest-modules/routers-module/routers.module';
   imports: [
     ConfigModule.forRoot(),
     RoutersModule.register(),
-    FinancesModule,
-    DatabaseModule,
-    MigrationsModule,
     SharedModule,
+    DatabaseModule,
+    FinancesModule,
+    MigrationsModule,
     EventsModule,
   ],
   controllers: [AppController],

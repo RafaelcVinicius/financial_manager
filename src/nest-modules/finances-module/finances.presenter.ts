@@ -5,6 +5,8 @@ import { CollectionPresenter } from '../shared-module/collection.presenter';
 
 export class FinancePresenter {
   id: string;
+
+  @Transform(({ value }: { value: number }) => Number(value))
   value: number;
 
   @Transform(({ value }: { value: Date }) => value?.toISOString())

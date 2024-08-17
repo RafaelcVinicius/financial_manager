@@ -8,13 +8,13 @@ import { FinanceModelMapper } from '../models/finance.model.mapper';
 import FinanceModel from '../models/finance.model';
 import { NotFoundError } from '../../../../../@shared/domain/error/not-found.error';
 import { Uuid } from '../../../../../@shared/domain/value-objects/uuid.vo';
-import { UnitOfWorkSequelize } from '../../../../../@shared/infra/db/sequelize/unit-of-work-sequelize';
+import { IUnitOfWork } from '../../../../../@shared/domain/repository/unit-of-work.interface';
 
 export class FinanceRepository implements IFinanceRepository {
   sortableFields: string[] = ['name', 'created_at'];
 
   constructor(
-    private uow: UnitOfWorkSequelize,
+    private uow: IUnitOfWork,
     private model: typeof FinanceModel
   ) {}
 
@@ -45,9 +45,14 @@ export class FinanceRepository implements IFinanceRepository {
   }
 
   async findById(entity_id: Uuid): Promise<FinanceEntity | null> {
-    const model = await this.model.findByPk(entity_id.value);
+    try {
+      const model = await this.model.findByPk(entity_id.value);
 
-    return model ? FinanceModelMapper.toEntity(model) : null;
+      return model ? FinanceModelMapper.toEntity(model) : null;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   async findAll(): Promise<FinanceEntity[]> {

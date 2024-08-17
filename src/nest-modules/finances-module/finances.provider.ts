@@ -5,6 +5,9 @@ import { UnitOfWorkSequelize } from '../../@core/@shared/infra/db/sequelize/unit
 import FinanceModel from '../../@core/finances/infra/db/sequelize/models/finance.model';
 import { StoreFinanceUseCase } from '../../@core/finances/application/use-case/create-finance/store-finance.use-case';
 import { IFinanceRepository } from '../../@core/finances/domain/contracts/finance.interface';
+import { ListFinanceUseCase } from '../../@core/finances/application/use-case/list-finance/list-finance.use-case';
+import { GetFinanceUseCase } from '../../@core/finances/application/use-case/get-finance/get-finance.use-case';
+import { UpdateFinanceUseCase } from '../../@core/finances/application/use-case/update-finance/update-finance.use-case';
 
 export const REPOSITORIES = {
   FINANCE_REPOSITORY: {
@@ -33,6 +36,33 @@ export const USE_CASES = {
       return new StoreFinanceUseCase(appService, financeRepository);
     },
     inject: [ApplicationService, REPOSITORIES.FINANCE_REPOSITORY.provide],
+  },
+
+  GET_FINANCE_USE_CASE: {
+    provide: GetFinanceUseCase,
+    useFactory: (financeRepository: IFinanceRepository) => {
+      return new GetFinanceUseCase(financeRepository);
+    },
+    inject: [REPOSITORIES.FINANCE_REPOSITORY.provide],
+  },
+
+  UPDATE_FINANCE_USE_CASE: {
+    provide: UpdateFinanceUseCase,
+    useFactory: (
+      appService: ApplicationService,
+      financeRepository: IFinanceRepository
+    ) => {
+      return new UpdateFinanceUseCase(appService, financeRepository);
+    },
+    inject: [ApplicationService, REPOSITORIES.FINANCE_REPOSITORY.provide],
+  },
+
+  LIST_FINANCE_USE_CASE: {
+    provide: ListFinanceUseCase,
+    useFactory: (financeRepository: IFinanceRepository) => {
+      return new ListFinanceUseCase(financeRepository);
+    },
+    inject: [REPOSITORIES.FINANCE_REPOSITORY.provide],
   },
 };
 

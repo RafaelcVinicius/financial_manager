@@ -11,5 +11,6 @@ import { FinancesController } from './finances.controller';
     ...Object.values(FINANCE_PROVIDERS.USE_CASES),
     ...Object.values(FINANCE_PROVIDERS.REPOSITORIES),
   ],
+  exports: [FINANCE_PROVIDERS.REPOSITORIES.FINANCE_REPOSITORY.provide],
 })
 export class FinancesModule {}

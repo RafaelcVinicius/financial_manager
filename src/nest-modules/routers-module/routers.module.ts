@@ -8,8 +8,13 @@ export class RoutersModule extends NestRouterModule {
   static register() {
     return super.register([
       {
-        path: 'finances',
-        module: FinancesModule,
+        path: 'v1',
+        children: [
+          {
+            path: 'finances',
+            module: FinancesModule,
+          },
+        ],
       },
     ]);
   }
