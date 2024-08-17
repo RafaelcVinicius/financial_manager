@@ -1,8 +1,18 @@
-import { IsNotEmpty, IsNumber, IsUUID, validateSync } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+  MaxLength,
+  MinLength,
+  validateSync,
+} from 'class-validator';
 
 export type UpdateFinanceInputConstructorProps = {
   id: string;
-  value: number;
+  value?: number;
+  description?: string;
 };
 
 export class UpdateFinanceInput {
@@ -11,14 +21,21 @@ export class UpdateFinanceInput {
   id: string;
 
   @IsNumber()
-  @IsNotEmpty()
-  value: number;
+  @IsOptional()
+  value?: number;
+
+  @IsString()
+  @MaxLength(255)
+  @MinLength(3)
+  @IsOptional()
+  description?: string;
 
   constructor(props: UpdateFinanceInputConstructorProps) {
     if (!props) return;
 
     this.id = props.id;
     this.value = props.value;
+    this.description = props.description;
   }
 }
 

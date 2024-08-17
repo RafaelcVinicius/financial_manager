@@ -7,6 +7,7 @@ export class FinanceModelMapper {
     return {
       id: entity.id.value,
       value: entity.value.toBigint(),
+      description: entity.description,
       created_at: entity.created_at,
       updated_at: entity.updated_at,
       deleted_at: entity.deleted_at,
@@ -17,6 +18,7 @@ export class FinanceModelMapper {
     return new FinanceEntity({
       id: model.id,
       value: parseFloat(model.value.toString()).toDecimal(),
+      description: model.description,
       created_at: model.created_at,
       updated_at: model.updated_at,
       deleted_at: model.deleted_at,

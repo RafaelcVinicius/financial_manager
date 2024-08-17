@@ -4,6 +4,7 @@ import SequelizeModel from '../../../../../@shared/infra/db/sequelize/models/seq
 export type FinanceModelType = {
   id: string;
   value: number;
+  description: string;
   created_at: Date;
   updated_at: Date;
   deleted_at: Date;
@@ -19,4 +20,7 @@ export type FinanceModelType = {
 export default class FinanceModel extends SequelizeModel<FinanceModelType> {
   @Column({ type: DataType.BIGINT, allowNull: false })
   declare value: number;
+
+  @Column({ type: DataType.STRING(255), allowNull: false })
+  declare description: string;
 }

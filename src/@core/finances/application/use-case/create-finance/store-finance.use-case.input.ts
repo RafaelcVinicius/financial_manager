@@ -1,7 +1,15 @@
-import { IsNotEmpty, IsNumber, validateSync } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MaxLength,
+  MinLength,
+  validateSync,
+} from 'class-validator';
 
 export type StoreFinanceInputConstructorProps = {
   value: number;
+  description: string;
 };
 
 export class StoreFinanceInput {
@@ -9,10 +17,17 @@ export class StoreFinanceInput {
   @IsNotEmpty()
   value: number;
 
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(255)
+  @MinLength(3)
+  description: string;
+
   constructor(props: StoreFinanceInputConstructorProps) {
     if (!props) return;
 
     this.value = props.value;
+    this.description = props.description;
   }
 }
 

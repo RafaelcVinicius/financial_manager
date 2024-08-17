@@ -9,6 +9,8 @@ export class FinancePresenter {
   @Transform(({ value }: { value: number }) => Number(value))
   value: number;
 
+  description: string;
+
   @Transform(({ value }: { value: Date }) => value?.toISOString())
   created_at: Date;
   @Transform(({ value }: { value: Date }) => value?.toISOString())

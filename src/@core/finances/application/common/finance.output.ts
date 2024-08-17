@@ -3,6 +3,7 @@ import { FinanceEntity } from '../../domain/entities/finance.entity';
 export type FinanceOutput = {
   id: string;
   value: number;
+  description: string;
   created_at: Date;
   updated_at: Date;
 };

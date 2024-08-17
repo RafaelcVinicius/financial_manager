@@ -24,7 +24,8 @@ export class UpdateFinanceUseCase
 
       if (!entity) throw new NotFoundError(input.id, FinanceEntity);
 
-      entity.changeValue(input.value);
+      input.value && entity.changeValue(input.value);
+      input.description && entity.changeDescription(input.description);
 
       await this._financeRepo.update(entity);
 
