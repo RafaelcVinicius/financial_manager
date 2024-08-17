@@ -6,38 +6,41 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { FinanceEntity } from '../entities/finance.entity';
+import { StockEntity } from '../entities/stock.entity';
 import { ClassValidatorFields } from '../../../@shared/domain/validators/class-validator-fields';
 import { Notification } from '../../../@shared/domain/validators/notification';
-import { Uuid } from '../../../@shared/domain/value-objects/uuid.vo';
 
-export class FinanceRules {
+export class StockRules {
   @IsUUID('4', { groups: ['id'] })
-  @IsNotEmpty({ groups: ['id'] })
+  @IsNotEmpty({ groups: ['code'] })
   id: string;
 
-  @MaxLength(255, { groups: ['description'] })
-  @MinLength(3, { groups: ['description'] })
-  @IsString({ groups: ['description'] })
-  @IsNotEmpty({ groups: ['description'] })
-  description: string;
+  @MaxLength(10, { groups: ['code'] })
+  @MinLength(3, { groups: ['code'] })
+  @IsString({ groups: ['code'] })
+  @IsNotEmpty({ groups: ['code'] })
+  code: string;
 
   @IsNumber()
-  @IsNotEmpty({ groups: ['value'] })
-  value: number;
+  @IsNotEmpty({ groups: ['quantity'] })
+  quantity: number;
 
-  constructor(entity: FinanceEntity) {
+  @IsNumber()
+  @IsNotEmpty({ groups: ['unit_price'] })
+  unit_price: number;
+
+  constructor(entity: StockEntity) {
     Object.assign(this, entity);
 
     this.id = entity.id.value;
   }
 }
 
-export class FinanceValidator extends ClassValidatorFields {
+export class StockValidator extends ClassValidatorFields {
   validate(notification: Notification, data: any, fields: string[]): boolean {
     const newFields = fields?.length ? fields : ['id', 'description', 'value'];
 
-    return super.validate(notification, new FinanceRules(data), newFields);
+    return super.validate(notification, new StockRules(data), newFields);
   }
 
   static create() {

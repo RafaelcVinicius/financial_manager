@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { getConnectionToken } from '@nestjs/sequelize';
-import { MigrationsModule } from './nest-modules/database-module/migrations.module';
+import { MigrationsModule } from './nest-modules/database/migrations.module';
 import { migrator } from './@core/@shared/infra/db/sequelize/migrator';
 
 async function bootstrap() {

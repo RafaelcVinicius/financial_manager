@@ -2,7 +2,7 @@ import { Global, Module, Scope } from '@nestjs/common';
 import { SequelizeModule, getConnectionToken } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize';
 import { ConfigService } from '@nestjs/config';
-import { CONFIG_SCHEMA_TYPE } from '../config-module/config.module';
+import { CONFIG_SCHEMA_TYPE } from '../config/config.module';
 import FinanceModel from '../../@core/finances/infra/db/sequelize/models/finance.model';
 import { UnitOfWorkSequelize } from '../../@core/@shared/infra/db/sequelize/unit-of-work-sequelize';
 

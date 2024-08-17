@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { FinancesModule } from './nest-modules/finances-module/finances.module';
-import { ConfigModule } from './nest-modules/config-module/config.module';
-import { DatabaseModule } from './nest-modules/database-module/database.module';
-import { MigrationsModule } from './nest-modules/database-module/migrations.module';
+import { FinancesModule } from './nest-modules/finances/finances.module';
+import { ConfigModule } from './nest-modules/config/config.module';
+import { DatabaseModule } from './nest-modules/database/database.module';
+import { MigrationsModule } from './nest-modules/database/migrations.module';
 import { SharedModule } from './nest-modules/shared-module/shared.module';
 import { EventsModule } from './nest-modules/events-module/events.module';
-import { RoutersModule } from './nest-modules/routers-module/routers.module';
+import { RoutersModule } from './nest-modules/routers/routers.module';
 
 @Module({
   imports: [

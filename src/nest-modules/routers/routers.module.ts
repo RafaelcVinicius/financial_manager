@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { RouterModule as NestRouterModule } from '@nestjs/core';
-import { FinancesModule } from '../finances-module/finances.module';
+import { FinancesModule } from '../finances/finances.module';
 
 @Global()
 @Module({})

@@ -1,4 +1,4 @@
-import { FinanceEntity } from './finance.entity';
+import { FinanceEntity } from '../finance.entity';
 
 describe('Finance unit tests', () => {
   const finance = FinanceEntity.mock();
