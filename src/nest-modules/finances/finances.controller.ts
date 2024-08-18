@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { StoreFinanceUseCase } from '../../@core/finances/application/use-case/create-finance/store-finance.use-case';
 import { FinanceOutput } from '../../@core/finances/application/common/finance.output';
-import { StoreFinanceDto } from './dto/store_finance_dto';
+import { StoreFinanceDto } from './dto/store-finance_dto';
 import {
   FinancePresenter,
   FinancePresenterCollection,
@@ -18,7 +18,7 @@ import {
 import { GetFinanceUseCase } from '../../@core/finances/application/use-case/get-finance/get-finance.use-case';
 import { ListFinanceUseCase } from '../../@core/finances/application/use-case/list-finance/list-finance.use-case';
 import { UpdateFinanceUseCase } from '../../@core/finances/application/use-case/update-finance/update-finance.use-case';
-import { UpdateFinanceDto } from './dto/update_finance_dto';
+import { UpdateFinanceDto } from './dto/update-finance_dto';
 
 @Controller('/')
 export class FinancesController {

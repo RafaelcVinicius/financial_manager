@@ -1,15 +1,17 @@
 import { Transform } from '@nestjs/class-transformer';
 import { PaginationOutput } from '../../@core/@shared/application/pagination-output';
-import { FinanceOutput } from '../../@core/finances/application/common/finance.output';
 import { CollectionPresenter } from '../shared/collection.presenter';
+import { StockOutput } from '../../@core/stocks/application/common/stock.output';
 
-export class FinancePresenter {
+export class StockPresenter {
   id: string;
+  code: string;
 
   @Transform(({ value }: { value: number }) => Number(value))
-  value: number;
+  quantity: number;
 
-  description: string;
+  @Transform(({ value }: { value: number }) => Number(value))
+  unit_price: number;
 
   @Transform(({ value }: { value: Date }) => value?.toISOString())
   created_at: Date;
@@ -18,19 +20,19 @@ export class FinancePresenter {
   @Transform(({ value }: { value: Date }) => value?.toISOString())
   deleted_at: Date;
 
-  constructor(output: FinanceOutput) {
+  constructor(output: StockOutput) {
     Object.assign(this, {
       ...output,
     });
   }
 }
 
-export class FinancePresenterCollection extends CollectionPresenter {
-  data: FinancePresenter[];
+export class StockPresenterCollection extends CollectionPresenter {
+  data: StockPresenter[];
 
-  constructor(output: PaginationOutput<FinanceOutput>) {
+  constructor(output: PaginationOutput<StockOutput>) {
     const { items, ...paginationProps } = output;
     super(paginationProps);
-    this.data = items.map((i) => new FinancePresenter(i));
+    this.data = items.map((i) => new StockPresenter(i));
   }
 }

@@ -2,7 +2,7 @@ import EventEmitter2 from 'eventemitter2';
 import { DomainEventMediator } from '../../../../../@shared/domain/events/domain-event-mediator';
 import { UnitOfWorkFakeInMemory } from '../../../../../@shared/infra/db/in-memory/fake-unit-of-work-in-memory';
 import { ApplicationService } from '../../../../../@shared/application/application.service';
-import { StoreStockUseCase } from '../stock-stock.use-case';
+import { StoreStockUseCase } from '../store-stock.use-case';
 import { StockInMemoryRepository } from '../../../../infra/db/in-memory/stock-in-memory.repository';
 
 describe('StoreStockUseCase Unit Tests', () => {

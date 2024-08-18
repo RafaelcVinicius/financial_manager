@@ -6,7 +6,7 @@ import { UnitOfWorkSequelize } from '../../../../../@shared/infra/db/sequelize/u
 import { setupSequelize } from '../../../../../@shared/infra/testing/helpers';
 import StockModel from '../../../../infra/db/sequelize/models/stock.model';
 import { StockRepository } from '../../../../infra/db/sequelize/repositories/stock.repository';
-import { StoreStockUseCase } from '../stock-stock.use-case';
+import { StoreStockUseCase } from '../store-stock.use-case';
 
 describe('StoreStockUseCase Integration Tests', () => {
   let useCase: StoreStockUseCase;

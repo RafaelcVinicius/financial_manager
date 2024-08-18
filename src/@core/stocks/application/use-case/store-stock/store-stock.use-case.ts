@@ -4,7 +4,7 @@ import { EntityValidationError } from '../../../../@shared/domain/validators/val
 import { IStockRepository } from '../../../domain/contracts/stock.interface';
 import { StockEntity } from '../../../domain/entities/stock.entity';
 import { StockOutput, StockOutputMapper } from '../../common/stock.output';
-import { StoreStockInput } from './stock-stock.use-case.input';
+import { StoreStockInput } from './store-stock.use-case.input';
 
 export class StoreStockUseCase
   implements IUseCase<StoreStockInput, StockOutput>

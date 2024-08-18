@@ -2,7 +2,7 @@ import { MigrationFn } from 'umzug';
 import { DataTypes, Sequelize } from 'sequelize';
 
 export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().createTable('finance_stocks', {
+  await sequelize.getQueryInterface().createTable('stocks', {
     id: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -36,5 +36,5 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
 };
 
 export const down: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().dropTable('finance_stocks');
+  await sequelize.getQueryInterface().dropTable('stocks');
 };

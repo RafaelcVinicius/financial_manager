@@ -5,8 +5,9 @@ import { ConfigService } from '@nestjs/config';
 import { CONFIG_SCHEMA_TYPE } from '../config/config.module';
 import FinanceModel from '../../@core/finances/infra/db/sequelize/models/finance.model';
 import { UnitOfWorkSequelize } from '../../@core/@shared/infra/db/sequelize/unit-of-work-sequelize';
+import StockModel from '../../@core/stocks/infra/db/sequelize/models/stock.model';
 
-const models = [FinanceModel];
+const models = [FinanceModel, StockModel];
 
 @Global()
 @Module({
