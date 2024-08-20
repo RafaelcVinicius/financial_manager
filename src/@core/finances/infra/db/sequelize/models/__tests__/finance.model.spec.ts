@@ -1,5 +1,5 @@
-import { setupSequelize } from '../../../../../@shared/infra/testing/helpers';
-import FinanceModel from './finance.model';
+import { setupSequelize } from '../../../../../../@shared/infra/testing/helpers';
+import FinanceModel from '../finance.model';
 
 describe('Finances model integration tests', () => {
   setupSequelize();
