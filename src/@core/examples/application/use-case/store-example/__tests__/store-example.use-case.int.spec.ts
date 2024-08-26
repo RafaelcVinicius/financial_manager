@@ -4,26 +4,26 @@ import { DomainEventMediator } from '../../../../../@shared/domain/events/domain
 import { Uuid } from '../../../../../@shared/domain/value-objects/uuid.vo';
 import { UnitOfWorkSequelize } from '../../../../../@shared/infra/db/sequelize/unit-of-work-sequelize';
 import { setupSequelize } from '../../../../../@shared/infra/testing/helpers';
-import FinanceModel from '../../../../infra/db/sequelize/models/finance.model';
-import { FinanceRepository } from '../../../../infra/db/sequelize/repositories/finance.repository';
-import { StoreFinanceUseCase } from '../store-finance.use-case';
+import ExampleModel from '../../../../infra/db/sequelize/models/example.model';
+import { ExampleRepository } from '../../../../infra/db/sequelize/repositories/example.repository';
+import { StoreExampleUseCase } from '../store-example.use-case';
 
-describe('StoreFinanceUseCase Integration Tests', () => {
-  let useCase: StoreFinanceUseCase;
-  let repository: FinanceRepository;
+describe('StoreExampleUseCase Integration Tests', () => {
+  let useCase: StoreExampleUseCase;
+  let repository: ExampleRepository;
 
-  const setup = setupSequelize({ models: [FinanceModel] });
+  const setup = setupSequelize({ models: [ExampleModel] });
 
   beforeAll(async () => {
     const uow = new UnitOfWorkSequelize(setup.sequelize);
     const domainEvent = new DomainEventMediator(new EventEmitter2());
     const app = new ApplicationService(uow, domainEvent);
 
-    repository = new FinanceRepository(uow, FinanceModel);
-    useCase = new StoreFinanceUseCase(app, repository);
+    repository = new ExampleRepository(uow, ExampleModel);
+    useCase = new StoreExampleUseCase(app, repository);
   });
 
-  it('should create a finance', async () => {
+  it('should create a example', async () => {
     let output = await useCase.execute({ value: 741 });
     let entity = await repository.findById(new Uuid(output.id));
 
@@ -37,7 +37,9 @@ describe('StoreFinanceUseCase Integration Tests', () => {
     output = await useCase.execute({
       value: 789,
     });
+
     entity = await repository.findById(new Uuid(output.id));
+
     expect(output).toStrictEqual({
       id: entity!.id.value,
       value: 789,

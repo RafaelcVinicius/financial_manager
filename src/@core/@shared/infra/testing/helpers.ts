@@ -7,17 +7,9 @@ export function setupSequelize(options: SequelizeOptions = {}) {
   const dbConfig = Config.db();
 
   beforeAll(async () => {
-    // if ('models' in options) delete options['models'];
-
     _sequelize = new Sequelize({
       ...dbConfig,
       ...options,
-      // models: await glob(
-      //   join(__dirname, '..', '..', '..', '..', '..') + '/**/*.model.ts',
-      //   {
-      //     ignore: '**/@shared/**',
-      //   }
-      // ),
     });
   });
 
