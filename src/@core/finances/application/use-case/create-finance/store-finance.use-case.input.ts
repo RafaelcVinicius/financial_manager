@@ -1,7 +1,8 @@
-import { IsNotEmpty, IsNumber, validateSync } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, validateSync } from 'class-validator';
 
 export type StoreFinanceInputConstructorProps = {
   value: number;
+  description: string;
 };
 
 export class StoreFinanceInput {
@@ -9,10 +10,14 @@ export class StoreFinanceInput {
   @IsNotEmpty()
   value: number;
 
+  @IsString()
+  @IsNotEmpty()
+  description: string;
+
   constructor(props: StoreFinanceInputConstructorProps) {
     if (!props) return;
 
-    this.value = props.value;
+    Object.assign(this, props);
   }
 }
 

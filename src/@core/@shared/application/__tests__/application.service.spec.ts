@@ -7,7 +7,7 @@ import { ValueObject } from '../../domain/value-object';
 import { UnitOfWorkFakeInMemory } from '../../infra/db/in-memory/fake-unit-of-work-in-memory';
 
 class StubAggregateRoot extends AggregateRoot {
-  get entity_id(): ValueObject {
+  get id(): ValueObject {
     throw new Error('Method not implemented.');
   }
   toJSON() {

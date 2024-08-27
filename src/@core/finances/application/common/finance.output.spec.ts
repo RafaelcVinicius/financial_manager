@@ -12,6 +12,7 @@ describe('FinanceOutputMapper Unit Tests', () => {
     expect(output).toStrictEqual({
       id: entity.id.value,
       value: 15000,
+      description: 'Teste',
       created_at: entity.created_at,
       updated_at: entity.updated_at,
     });

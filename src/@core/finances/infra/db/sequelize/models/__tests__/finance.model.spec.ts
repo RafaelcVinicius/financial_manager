@@ -2,7 +2,7 @@ import { setupSequelize } from '../../../../../../@shared/infra/testing/helpers'
 import FinanceModel from '../finance.model';
 
 describe('Finances model integration tests', () => {
-  setupSequelize();
+  setupSequelize({ models: [FinanceModel] });
 
   test('table name', () => {
     expect(FinanceModel.tableName).toBe('finances');
@@ -13,6 +13,7 @@ describe('Finances model integration tests', () => {
 
     expect(attributesMap).toHaveProperty('id');
     expect(attributesMap).toHaveProperty('value');
+    expect(attributesMap).toHaveProperty('description');
     expect(attributesMap).toHaveProperty('created_at');
     expect(attributesMap).toHaveProperty('updated_at');
     expect(attributesMap).toHaveProperty('deleted_at');

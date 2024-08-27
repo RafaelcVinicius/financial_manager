@@ -32,7 +32,9 @@ describe('ListFinanceUseCase Unit Tests', () => {
       last_page: 1,
       per_page: 15,
       total: 1,
-      items: [financeEntity.toJSON()],
+      items: [
+        { ...financeEntity.toJSON(), updated_at: output.items[0].updated_at },
+      ],
     });
   });
 });

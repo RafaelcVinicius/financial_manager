@@ -2,7 +2,7 @@ import { setupSequelize } from '../../../../../../@shared/infra/testing/helpers'
 import StockModel from '../stock.model';
 
 describe('Stock model integration tests', () => {
-  setupSequelize();
+  setupSequelize({ models: [StockModel] });
 
   test('table name', () => {
     expect(StockModel.tableName).toBe('stocks');

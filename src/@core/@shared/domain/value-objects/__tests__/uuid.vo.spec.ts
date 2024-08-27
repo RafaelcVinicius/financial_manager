@@ -12,12 +12,12 @@ describe('Uuid Unit Tests', () => {
 
   test('should create a valid uuid', () => {
     const uuid = new Uuid();
-    expect(uuid.id).toBeDefined();
-    expect(uuidValidate(uuid.id)).toBe(true);
+    expect(uuid.value).toBeDefined();
+    expect(uuidValidate(uuid.value)).toBe(true);
   });
 
   test('should accept a valid uuid', () => {
     const uuid = new Uuid('c3e9b0d0-7b6f-4a8e-8e1f-3f9e6a2f7e3c');
-    expect(uuid.id).toBe('c3e9b0d0-7b6f-4a8e-8e1f-3f9e6a2f7e3c');
+    expect(uuid.value).toBe('c3e9b0d0-7b6f-4a8e-8e1f-3f9e6a2f7e3c');
   });
 });

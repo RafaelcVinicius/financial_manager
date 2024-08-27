@@ -7,11 +7,10 @@ export class StockModelMapper {
     return {
       id: entity.id.value,
       code: entity.code,
-      quantity: entity.quantity.toBigint(),
+      quantity: entity.quantity,
       unit_price: entity.unit_price.toBigint(),
       created_at: entity.created_at,
       updated_at: entity.updated_at,
-      deleted_at: entity.deleted_at,
     };
   }
 
@@ -19,11 +18,10 @@ export class StockModelMapper {
     return new StockEntity({
       id: model.id,
       code: model.code,
-      quantity: parseFloat(model.quantity.toString()).toDecimal(),
+      quantity: model.quantity,
       unit_price: parseFloat(model.unit_price.toString()).toDecimal(),
       created_at: model.created_at,
       updated_at: model.updated_at,
-      deleted_at: model.deleted_at,
     });
   }
 }

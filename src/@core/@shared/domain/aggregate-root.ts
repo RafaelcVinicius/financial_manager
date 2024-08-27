@@ -22,7 +22,7 @@ export abstract class AggregateRoot extends Entity {
 
   getUncommittedEvents(): IDomainEvent[] {
     return Array.from(this.events).filter(
-      (event) => !this.dispatchedEvents.has(event),
+      (event) => !this.dispatchedEvents.has(event)
     );
   }
 

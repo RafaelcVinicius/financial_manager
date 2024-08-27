@@ -8,7 +8,7 @@ export class Uuid extends ValueObject {
 
   public validate(): void {
     if (!uuidValidate(this.value)) {
-      throw new InvalidUuidError('uuid');
+      throw new InvalidUuidError();
     }
   }
 }

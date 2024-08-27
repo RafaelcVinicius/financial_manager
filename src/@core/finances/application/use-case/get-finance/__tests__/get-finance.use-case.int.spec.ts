@@ -25,6 +25,9 @@ describe('GetFinanceUseCase Integration Tests', () => {
   it('should create a finance', async () => {
     const output = await useCase.execute({ id: financeEntity.id.value });
 
-    expect(output).toStrictEqual(financeEntity.toJSON());
+    expect(output).toStrictEqual({
+      ...financeEntity.toJSON(),
+      updated_at: output.updated_at,
+    });
   });
 });

@@ -4,25 +4,31 @@ import FinanceModel from '../finance.model';
 import { FinanceModelMapper } from '../finance.model.mapper';
 
 describe('Finance model mapper tests', () => {
-  setupSequelize();
+  setupSequelize({ models: [FinanceModel] });
 
-  const financeEntiry = FinanceEntity.mock();
+  const financeEntity = FinanceEntity.mock();
 
   it('Should map to model', () => {
-    const model = FinanceModel.build(financeEntiry.toJSON());
+    const model = FinanceModel.build({
+      ...financeEntity.toJSON(),
+      value: financeEntity.value * 1000000,
+    });
 
     const financeEntityMappedToModel =
-      FinanceModelMapper.toModel(financeEntiry);
+      FinanceModelMapper.toModel(financeEntity);
 
     expect(model!.toJSON()).toMatchObject(financeEntityMappedToModel);
   }, 30000);
 
   it('Should map to entity', () => {
-    const model = FinanceModel.build(financeEntiry.toJSON());
+    const model = FinanceModel.build({
+      ...financeEntity.toJSON(),
+      value: financeEntity.value * 1000000,
+    });
 
     const financeModelMappedToEntity = FinanceModelMapper.toEntity(model);
 
-    expect(financeEntiry.toJSON()).toMatchObject(
+    expect(financeEntity.toJSON()).toMatchObject(
       financeModelMappedToEntity.toJSON()
     );
   }, 30000);

@@ -24,34 +24,39 @@ describe('StoreFinanceUseCase Integration Tests', () => {
   });
 
   it('should create a finance', async () => {
-    let output = await useCase.execute({ value: 741 });
+    let output = await useCase.execute({ value: 741, description: 'teste' });
     let entity = await repository.findById(new Uuid(output.id));
 
     expect(output).toStrictEqual({
       id: entity!.id.value,
       value: 741,
+      description: 'teste',
       created_at: undefined,
       updated_at: undefined,
     });
 
     output = await useCase.execute({
       value: 789,
+      description: 'teste',
     });
     entity = await repository.findById(new Uuid(output.id));
     expect(output).toStrictEqual({
       id: entity!.id.value,
       value: 789,
+      description: 'teste',
       created_at: undefined,
       updated_at: undefined,
     });
 
     output = await useCase.execute({
       value: 853,
+      description: 'teste',
     });
     entity = await repository.findById(new Uuid(output.id));
     expect(output).toStrictEqual({
       id: entity!.id.value,
       value: 853,
+      description: 'teste',
       created_at: undefined,
       updated_at: undefined,
     });

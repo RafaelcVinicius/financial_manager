@@ -2,11 +2,11 @@ import { Controller, Get, INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundErrorFilter } from './not-found-error.filter';
 import request from 'supertest';
-import { NotFoundError } from '../../../core/shared/domain/errors/not-found.error';
-import { Entity } from '../../../core/shared/domain/entity';
+import { Entity } from '../../../@core/@shared/domain/entity';
+import { NotFoundError } from '../../../@core/@shared/domain/error/not-found.error';
 
 class StubEntity extends Entity {
-  entity_id: any;
+  id: any;
   toJSON(): Required<any> {
     return {};
   }
