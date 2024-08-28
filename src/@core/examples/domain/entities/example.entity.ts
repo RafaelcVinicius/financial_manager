@@ -21,12 +21,9 @@ export class ExampleEntity extends Entity {
   constructor(props: ExampleEntityType) {
     super();
 
-    this.id = new Uuid(props.id);
-    this.value = props.value;
-    this.created_at = props.created_at;
-    this.updated_at = props.updated_at;
-    this.deleted_at = props.deleted_at;
+    Object.assign(this, props);
 
+    this.id = new Uuid(props.id);
     this.validate();
   }
 

@@ -11,7 +11,10 @@ describe('BondOutputMapper Unit Tests', () => {
 
     expect(output).toStrictEqual({
       id: entity.id.value,
-      value: 15000,
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LFT',
+      fee: 0.15,
       created_at: entity.created_at,
       updated_at: entity.updated_at,
     });

@@ -12,7 +12,7 @@ export class StoreExampleInput {
   constructor(props: StoreExampleInputConstructorProps) {
     if (!props) return;
 
-    this.value = props.value;
+    Object.assign(this, props);
   }
 }
 

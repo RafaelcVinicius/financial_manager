@@ -24,36 +24,56 @@ describe('StoreBondUseCase Integration Tests', () => {
   });
 
   it('should create a bond', async () => {
-    let output = await useCase.execute({ value: 741 });
+    let output = await useCase.execute({
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
+    });
     let entity = await repository.findById(new Uuid(output.id));
 
     expect(output).toStrictEqual({
       id: entity!.id.value,
-      value: 741,
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
       created_at: undefined,
       updated_at: undefined,
     });
 
     output = await useCase.execute({
-      value: 789,
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
     });
 
     entity = await repository.findById(new Uuid(output.id));
 
     expect(output).toStrictEqual({
       id: entity!.id.value,
-      value: 789,
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
       created_at: undefined,
       updated_at: undefined,
     });
 
     output = await useCase.execute({
-      value: 853,
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
     });
     entity = await repository.findById(new Uuid(output.id));
     expect(output).toStrictEqual({
       id: entity!.id.value,
-      value: 853,
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
       created_at: undefined,
       updated_at: undefined,
     });

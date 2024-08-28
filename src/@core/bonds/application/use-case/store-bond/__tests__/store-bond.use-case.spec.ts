@@ -19,24 +19,38 @@ describe('StoreBondUseCase Unit Tests', () => {
 
   it('should create a bonds', async () => {
     const spyInsert = jest.spyOn(repository, 'create');
-    let output = await useCase.execute({ value: 321 });
+    let output = await useCase.execute({
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
+    });
 
     expect(spyInsert).toHaveBeenCalledTimes(1);
     expect(output).toStrictEqual({
       id: repository.items[0].id.value,
-      value: 321,
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
       created_at: repository.items[0].created_at,
       updated_at: repository.items[0].updated_at,
     });
 
     output = await useCase.execute({
-      value: 852,
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
     });
 
     expect(spyInsert).toHaveBeenCalledTimes(2);
     expect(output).toStrictEqual({
       id: repository.items[1].id.value,
-      value: 852,
+      unit_price: 1500,
+      quantity: 0.5,
+      code: 'LTF',
+      fee: 0.18,
       created_at: repository.items[1].created_at,
       updated_at: repository.items[1].updated_at,
     });

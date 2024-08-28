@@ -1,10 +1,7 @@
 import { IUseCase } from '../../../../@shared/application/use-case.interface';
 import { Uuid } from '../../../../@shared/domain/value-objects/uuid.vo';
 import { IBondRepository } from '../../../domain/contracts/bond.interface';
-import {
-  BondOutput,
-  BondOutputMapper,
-} from '../../common/bond.output';
+import { BondOutput, BondOutputMapper } from '../../common/bond.output';
 import { NotFoundError } from '../../../../@shared/domain/error/not-found.error';
 import { BondEntity } from '../../../domain/entities/bond.entity';
 import { UpdateBondInput } from './update-bond.use-case.input';
@@ -24,7 +21,7 @@ export class UpdateBondUseCase
 
       if (!entity) throw new NotFoundError(input.id, BondEntity);
 
-      input.value && entity.changeValue(input.value);
+      input.unit_price && entity.changeUnitPrice(input.unit_price);
 
       await this._BondRepo.update(entity);
 

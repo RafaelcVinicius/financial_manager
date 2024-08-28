@@ -24,8 +24,7 @@ export class UpdateExampleInput {
   constructor(props: UpdateExampleInputConstructorProps) {
     if (!props) return;
 
-    this.id = props.id;
-    this.value = props.value;
+    Object.assign(this, props);
   }
 }
 

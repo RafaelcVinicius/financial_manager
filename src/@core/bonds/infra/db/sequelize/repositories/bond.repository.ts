@@ -49,16 +49,11 @@ export class BondRepository implements IBondRepository {
   }
 
   async findById(entity_id: Uuid): Promise<BondEntity | null> {
-    try {
-      const model = await this.model.findByPk(entity_id.value, {
-        transaction: this.uow.getTransaction(),
-      });
+    const model = await this.model.findByPk(entity_id.value, {
+      transaction: this.uow.getTransaction(),
+    });
 
-      return model ? BondModelMapper.toEntity(model) : null;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+    return model ? BondModelMapper.toEntity(model) : null;
   }
 
   async findAll(): Promise<BondEntity[]> {

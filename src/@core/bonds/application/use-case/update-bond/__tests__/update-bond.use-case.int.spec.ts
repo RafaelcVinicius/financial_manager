@@ -30,14 +30,17 @@ describe('UpdateBondUseCase Integration Tests', () => {
 
     await useCase.execute({
       id: entity.id.value,
-      value: 10,
+      unit_price: 1800,
     });
 
     const model = await repository.findById(entity.id);
 
     expect(model!.toJSON()).toMatchObject({
       id: entity.id.value,
-      value: 10,
+      unit_price: 1800,
+      quantity: 0.5,
+      code: 'LFT',
+      fee: 0.15,
     });
   });
 });

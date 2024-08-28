@@ -2,7 +2,7 @@ import { Column, DataType, Table } from 'sequelize-typescript';
 import SequelizeModel from '../../../../../@shared/infra/db/sequelize/models/sequelize.model';
 
 export type ExampleModelType = {
-  id: string;
+  id?: string;
   value: number;
   created_at: Date;
   updated_at: Date;

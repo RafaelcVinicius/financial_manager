@@ -2,7 +2,10 @@ import { BondEntity } from '../../domain/entities/bond.entity';
 
 export type BondOutput = {
   id: string;
-  value: number;
+  unit_price: number;
+  quantity: number;
+  fee: number;
+  code: string;
   created_at: Date;
   updated_at: Date;
 };

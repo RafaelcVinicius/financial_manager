@@ -6,28 +6,30 @@ import { BondModelMapper } from '../bond.model.mapper';
 describe('Bond model mapper tests', () => {
   setupSequelize({ models: [BondModel] });
 
-  const Entity = BondEntity.mock();
+  const entity = BondEntity.mock();
 
   it('Should map to model', () => {
     const model = BondModel.build({
-      ...Entity.toJSON(),
-      value: Entity.value.toBigint(),
+      ...entity.toJSON(),
+      unit_price: entity.unit_price.toBigint(),
+      fee: entity.fee.toBigint(),
       deleted_at: undefined,
     });
 
-    const entityMappedToModel = BondModelMapper.toModel(Entity);
+    const entityMappedToModel = BondModelMapper.toModel(entity);
 
     expect(model!.toJSON()).toMatchObject(entityMappedToModel);
   }, 30000);
 
   it('Should map to entity', () => {
     const model = BondModel.build({
-      ...Entity.toJSON(),
-      value: Entity.value.toBigint(),
+      ...entity.toJSON(),
+      unit_price: entity.unit_price.toBigint(),
+      fee: entity.fee.toBigint(),
     });
 
     const modelMappedToEntity = BondModelMapper.toEntity(model);
 
-    expect(Entity.toJSON()).toMatchObject(modelMappedToEntity.toJSON());
+    expect(entity.toJSON()).toMatchObject(modelMappedToEntity.toJSON());
   }, 30000);
 });

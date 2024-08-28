@@ -8,10 +8,7 @@ import {
   BondSearchResult,
   IBondRepository,
 } from '../../../domain/contracts/bond.interface';
-import {
-  BondOutput,
-  BondOutputMapper,
-} from '../../common/bond.output';
+import { BondOutput, BondOutputMapper } from '../../common/bond.output';
 import { ListBondInput } from './list-bond.use-case.input';
 
 export class ListBondUseCase
@@ -20,9 +17,7 @@ export class ListBondUseCase
   constructor(private readonly _BondRepo: IBondRepository) {}
 
   async execute(input: ListBondInput): Promise<ListBondsOutput> {
-    const entities = await this._BondRepo.search(
-      new BondSearchParams(input)
-    );
+    const entities = await this._BondRepo.search(new BondSearchParams(input));
 
     return this.toOutput(entities);
   }

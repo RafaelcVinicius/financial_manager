@@ -12,7 +12,10 @@ describe('Bond model integration tests', () => {
     const attributesMap = BondModel.getAttributes();
 
     expect(attributesMap).toHaveProperty('id');
-    expect(attributesMap).toHaveProperty('value');
+    expect(attributesMap).toHaveProperty('unit_price');
+    expect(attributesMap).toHaveProperty('quantity');
+    expect(attributesMap).toHaveProperty('code');
+    expect(attributesMap).toHaveProperty('fee');
     expect(attributesMap).toHaveProperty('created_at');
     expect(attributesMap).toHaveProperty('updated_at');
     expect(attributesMap).toHaveProperty('deleted_at');

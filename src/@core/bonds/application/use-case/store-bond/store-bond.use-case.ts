@@ -3,15 +3,10 @@ import { IUseCase } from '../../../../@shared/application/use-case.interface';
 import { EntityValidationError } from '../../../../@shared/domain/validators/validation.error';
 import { IBondRepository } from '../../../domain/contracts/bond.interface';
 import { BondEntity } from '../../../domain/entities/bond.entity';
-import {
-  BondOutput,
-  BondOutputMapper,
-} from '../../common/bond.output';
+import { BondOutput, BondOutputMapper } from '../../common/bond.output';
 import { StoreBondInput } from './store-bond.use-case.input';
 
-export class StoreBondUseCase
-  implements IUseCase<StoreBondInput, BondOutput>
-{
+export class StoreBondUseCase implements IUseCase<StoreBondInput, BondOutput> {
   constructor(
     private readonly _appService: ApplicationService,
     private readonly _BondRepo: IBondRepository

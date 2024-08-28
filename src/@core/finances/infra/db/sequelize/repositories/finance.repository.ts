@@ -45,14 +45,9 @@ export class FinanceRepository implements IFinanceRepository {
   }
 
   async findById(entity_id: Uuid): Promise<FinanceEntity | null> {
-    try {
-      const model = await this.model.findByPk(entity_id.value);
+    const model = await this.model.findByPk(entity_id.value);
 
-      return model ? FinanceModelMapper.toEntity(model) : null;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+    return model ? FinanceModelMapper.toEntity(model) : null;
   }
 
   async findAll(): Promise<FinanceEntity[]> {
