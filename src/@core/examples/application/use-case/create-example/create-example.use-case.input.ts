@@ -1,23 +1,23 @@
 import { IsNotEmpty, IsNumber, validateSync } from 'class-validator';
 
-export type StoreExampleInputConstructorProps = {
+export type CreateExampleInputConstructorProps = {
   value: number;
 };
 
-export class StoreExampleInput {
+export class CreateExampleInput {
   @IsNumber()
   @IsNotEmpty()
   value: number;
 
-  constructor(props: StoreExampleInputConstructorProps) {
+  constructor(props: CreateExampleInputConstructorProps) {
     if (!props) return;
 
     Object.assign(this, props);
   }
 }
 
-export class ValidateStoreExampleInput {
-  static validate(input: StoreExampleInput) {
+export class ValidateCreateExampleInput {
+  static validate(input: CreateExampleInput) {
     return validateSync(input);
   }
 }

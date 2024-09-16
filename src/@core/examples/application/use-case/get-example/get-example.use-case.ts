@@ -12,10 +12,10 @@ import { ExampleEntity } from '../../../domain/entities/example.entity';
 export class GetExampleUseCase
   implements IUseCase<GetExampleInput, ExampleOutput>
 {
-  constructor(private readonly _ExampleRepo: IExampleRepository) {}
+  constructor(private readonly _exampleRepo: IExampleRepository) {}
 
   async execute(input: GetExampleInput): Promise<ExampleOutput> {
-    const entity = await this._ExampleRepo.findById(new Uuid(input.id));
+    const entity = await this._exampleRepo.findById(new Uuid(input.id));
 
     if (!entity) throw new NotFoundError(input.id, ExampleEntity);
 

@@ -6,10 +6,10 @@ import { UnitOfWorkSequelize } from '../../../../../@shared/infra/db/sequelize/u
 import { setupSequelize } from '../../../../../@shared/infra/testing/helpers';
 import ExampleModel from '../../../../infra/db/sequelize/models/example.model';
 import { ExampleRepository } from '../../../../infra/db/sequelize/repositories/example.repository';
-import { StoreExampleUseCase } from '../store-example.use-case';
+import { CreateExampleUseCase } from '../create-example.use-case';
 
-describe('StoreExampleUseCase Integration Tests', () => {
-  let useCase: StoreExampleUseCase;
+describe('CreateExampleUseCase Integration Tests', () => {
+  let useCase: CreateExampleUseCase;
   let repository: ExampleRepository;
 
   const setup = setupSequelize({ models: [ExampleModel] });
@@ -20,7 +20,7 @@ describe('StoreExampleUseCase Integration Tests', () => {
     const app = new ApplicationService(uow, domainEvent);
 
     repository = new ExampleRepository(uow, ExampleModel);
-    useCase = new StoreExampleUseCase(app, repository);
+    useCase = new CreateExampleUseCase(app, repository);
   });
 
   it('should create a example', async () => {

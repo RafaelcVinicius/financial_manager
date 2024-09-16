@@ -28,7 +28,7 @@ export class UpdateExampleInput {
   }
 }
 
-export class ValidateGetExampleInput {
+export class ValidateExampleInput {
   static validate(input: UpdateExampleInput) {
     return validateSync(input);
   }

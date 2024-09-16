@@ -15,18 +15,18 @@ export class UpdateExampleUseCase
 {
   constructor(
     private readonly _appService: ApplicationService,
-    private readonly _ExampleRepo: IExampleRepository
+    private readonly _exampleRepo: IExampleRepository
   ) {}
 
   async execute(input: UpdateExampleInput): Promise<ExampleOutput> {
     return await this._appService.run(async () => {
-      const entity = await this._ExampleRepo.findById(new Uuid(input.id));
+      const entity = await this._exampleRepo.findById(new Uuid(input.id));
 
       if (!entity) throw new NotFoundError(input.id, ExampleEntity);
 
       input.value && entity.changeValue(input.value);
 
-      await this._ExampleRepo.update(entity);
+      await this._exampleRepo.update(entity);
 
       return ExampleOutputMapper.toOutput(entity);
     });

@@ -7,17 +7,17 @@ import {
   ExampleOutput,
   ExampleOutputMapper,
 } from '../../common/example.output';
-import { StoreExampleInput } from './store-example.use-case.input';
+import { CreateExampleInput } from './create-example.use-case.input';
 
-export class StoreExampleUseCase
-  implements IUseCase<StoreExampleInput, ExampleOutput>
+export class CreateExampleUseCase
+  implements IUseCase<CreateExampleInput, ExampleOutput>
 {
   constructor(
     private readonly _appService: ApplicationService,
-    private readonly _ExampleRepo: IExampleRepository
+    private readonly _exampleRepo: IExampleRepository
   ) {}
 
-  async execute(input: StoreExampleInput): Promise<ExampleOutput> {
+  async execute(input: CreateExampleInput): Promise<ExampleOutput> {
     return await this._appService.run(async () => {
       const entity = ExampleEntity.create(input);
 
@@ -25,11 +25,11 @@ export class StoreExampleUseCase
         throw new EntityValidationError(entity.notification.toJSON());
       }
 
-      await this._ExampleRepo.create(entity);
+      await this._exampleRepo.create(entity);
 
       return ExampleOutputMapper.toOutput(entity);
     });
   }
 }
 
-export type StoreExampleOutput = ExampleOutput;
+export type CreateExampleOutput = ExampleOutput;

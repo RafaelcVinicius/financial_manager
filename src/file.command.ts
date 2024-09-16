@@ -17,10 +17,33 @@ export class CreateFileCommand extends CommandRunner {
 
     this.moduleClassName =
       this.moduleName.charAt(0).toUpperCase() + this.moduleName.slice(1);
+
+    // this.generateCore();
+
+    this.generateModule();
+  }
+
+  generateCore() {
     const templateDir = path.join(__dirname, '../src/@core/examples');
     const targetDir = path.join(
       __dirname,
       '../src/@core',
+      this.convertSingularToPlural(this.moduleName)
+    );
+
+    if (fs.existsSync(targetDir)) {
+      console.error(`Module ${this.moduleName} already exists.`);
+      process.exit(1);
+    }
+
+    this.copyAndReplacePlaceholders(templateDir, targetDir);
+  }
+
+  generateModule() {
+    const templateDir = path.join(__dirname, '../src/nest-modules/examples');
+    const targetDir = path.join(
+      __dirname,
+      '../src/nest-modules',
       this.convertSingularToPlural(this.moduleName)
     );
 
@@ -53,6 +76,11 @@ export class CreateFileCommand extends CommandRunner {
         let content = fs.readFileSync(srcPath, 'utf8');
         content = content
           .replace(/Example/g, this.moduleClassName)
+          .replace(
+            /Examples/g,
+            this.convertSingularToPlural(this.moduleClassName)
+          )
+          .replace(/EXAMPLE/g, this.moduleName.toUpperCase())
           .replace(/examples/g, this.convertSingularToPlural(this.moduleName))
           .replace(/example/g, this.moduleName);
         fs.writeFileSync(destPath, content);

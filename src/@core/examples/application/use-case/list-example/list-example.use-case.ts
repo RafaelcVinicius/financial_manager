@@ -12,15 +12,15 @@ import {
   ExampleOutput,
   ExampleOutputMapper,
 } from '../../common/example.output';
-import { ListExampleInput } from './list-example.use-case.input';
+import { ListExamplesInput } from './list-example.use-case.input';
 
-export class ListExampleUseCase
-  implements IUseCase<ListExampleInput, ListExamplesOutput>
+export class ListExamplesUseCase
+  implements IUseCase<ListExamplesInput, ListExamplesOutput>
 {
-  constructor(private readonly _ExampleRepo: IExampleRepository) {}
+  constructor(private readonly _exampleRepo: IExampleRepository) {}
 
-  async execute(input: ListExampleInput): Promise<ListExamplesOutput> {
-    const entities = await this._ExampleRepo.search(
+  async execute(input: ListExamplesInput): Promise<ListExamplesOutput> {
+    const entities = await this._exampleRepo.search(
       new ExampleSearchParams(input)
     );
 

@@ -3,7 +3,7 @@ import { SearchInput } from '../../../../@shared/application/search-input';
 import { SortDirection } from '../../../../@shared/domain/repository/search-params';
 import { ExampleFilter } from '../../../domain/contracts/example.interface';
 
-export class ListExampleInput implements SearchInput<ExampleFilter> {
+export class ListExamplesInput implements SearchInput<ExampleFilter> {
   page?: number;
   per_page?: number;
   sort?: string;
@@ -12,8 +12,8 @@ export class ListExampleInput implements SearchInput<ExampleFilter> {
   filter?: ExampleFilter;
 }
 
-export class ValidateListExampleInput {
-  static validate(input: ListExampleInput) {
+export class ValidateListExamplesInput {
+  static validate(input: ListExamplesInput) {
     return validateSync(input);
   }
 }

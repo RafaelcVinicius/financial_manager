@@ -2,11 +2,11 @@ import EventEmitter2 from 'eventemitter2';
 import { DomainEventMediator } from '../../../../../@shared/domain/events/domain-event-mediator';
 import { UnitOfWorkFakeInMemory } from '../../../../../@shared/infra/db/in-memory/fake-unit-of-work-in-memory';
 import { ExampleInMemoryRepository } from '../../../../infra/db/in-memory/example-in-memory.repository';
-import { StoreExampleUseCase } from '../store-example.use-case';
+import { CreateExampleUseCase } from '../create-example.use-case';
 import { ApplicationService } from '../../../../../@shared/application/application.service';
 
-describe('StoreExampleUseCase Unit Tests', () => {
-  let useCase: StoreExampleUseCase;
+describe('CreateExampleUseCase Unit Tests', () => {
+  let useCase: CreateExampleUseCase;
   let repository: ExampleInMemoryRepository;
 
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe('StoreExampleUseCase Unit Tests', () => {
     const uow = new UnitOfWorkFakeInMemory();
     const domainEvent = new DomainEventMediator(new EventEmitter2());
     const app = new ApplicationService(uow, domainEvent);
-    useCase = new StoreExampleUseCase(app, repository);
+    useCase = new CreateExampleUseCase(app, repository);
   });
 
   it('should create a examples', async () => {
