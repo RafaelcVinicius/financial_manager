@@ -18,7 +18,7 @@ export class StockModelMapper {
     return new StockEntity({
       id: model.id,
       code: model.code,
-      quantity: model.quantity,
+      quantity: parseFloat(model.quantity.toString()),
       unit_price: parseFloat(model.unit_price.toString()).toDecimal(),
       created_at: model.created_at,
       updated_at: model.updated_at,

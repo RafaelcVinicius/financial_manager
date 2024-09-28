@@ -14,10 +14,7 @@ import { GetBondUseCase } from '../../@core/bonds/application/use-case/get-bond/
 import { ListBondUseCase } from '../../@core/bonds/application/use-case/list-bond/list-bond.use-case';
 import { StoreBondUseCase } from '../../@core/bonds/application/use-case/store-bond/store-bond.use-case';
 import { UpdateBondUseCase } from '../../@core/bonds/application/use-case/update-bond/update-bond.use-case';
-import {
-  BondPresenter,
-  BondPresenterCollection,
-} from './bonds.presenter';
+import { BondPresenter, BondPresenterCollection } from './bonds.presenter';
 import { BondOutput } from '../../@core/bonds/application/common/bond.output';
 
 @Controller('/')
@@ -36,9 +33,7 @@ export class BondController {
 
   @Get()
   async list(@Query() query: any) {
-    return new BondPresenterCollection(
-      await this.listUseCase.execute(query)
-    );
+    return new BondPresenterCollection(await this.listUseCase.execute(query));
   }
 
   @Get(':id')
@@ -54,10 +49,7 @@ export class BondController {
   }
 
   @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updatePlanDto: UpdateBondDto
-  ) {
+  async update(@Param('id') id: string, @Body() updatePlanDto: UpdateBondDto) {
     const output = await this.updateUseCase.execute({ ...updatePlanDto, id });
     return BondController.serialize(output);
   }

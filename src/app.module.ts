@@ -9,6 +9,7 @@ import { SharedModule } from './nest-modules/shared/shared.module';
 import { EventsModule } from './nest-modules/events/events.module';
 import { RoutersModule } from './nest-modules/routers/routers.module';
 import { StocksModule } from './nest-modules/stocks/stock.module';
+import { BondsModule } from './nest-modules/bonds/bonds.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { StocksModule } from './nest-modules/stocks/stock.module';
     EventsModule,
     FinancesModule,
     StocksModule,
+    BondsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
