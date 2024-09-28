@@ -15,11 +15,12 @@ describe('DeleteExampleUseCase Unit Tests', () => {
     repository.create(entity);
   });
 
-  it('should get a example', async () => {
-    const spyInsert = jest.spyOn(repository, 'findById');
-    const output = await useCase.execute({ id: entity.id.value });
+  it('should delete a example', async () => {
+    const spyInsert = jest.spyOn(repository, 'delete');
+    await useCase.execute({ id: entity.id.value });
 
+    const output = await repository.findById(entity.id);
     expect(spyInsert).toHaveBeenCalledTimes(1);
-    expect(output).toStrictEqual(entity.toJSON());
+    expect(output).toBeNull();
   });
 });

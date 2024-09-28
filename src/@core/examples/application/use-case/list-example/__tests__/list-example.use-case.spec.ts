@@ -1,15 +1,15 @@
 import { ExampleEntity } from '../../../../domain/entities/example.entity';
 import { ExampleInMemoryRepository } from '../../../../infra/db/in-memory/example-in-memory.repository';
-import { ListExampleUseCase } from '../list-example.use-case';
+import { ListExamplesUseCase } from '../list-example.use-case';
 
 describe('ListExampleUseCase Unit Tests', () => {
-  let useCase: ListExampleUseCase;
+  let useCase: ListExamplesUseCase;
   let repository: ExampleInMemoryRepository;
   let entity: ExampleEntity;
 
   beforeAll(async () => {
     repository = new ExampleInMemoryRepository();
-    useCase = new ListExampleUseCase(repository);
+    useCase = new ListExamplesUseCase(repository);
 
     entity = ExampleEntity.mock();
     repository.create(entity);

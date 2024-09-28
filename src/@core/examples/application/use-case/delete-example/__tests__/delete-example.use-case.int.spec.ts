@@ -3,7 +3,7 @@ import { setupSequelize } from '../../../../../@shared/infra/testing/helpers';
 import { ExampleEntity } from '../../../../domain/entities/example.entity';
 import ExampleModel from '../../../../infra/db/sequelize/models/example.model';
 import { ExampleRepository } from '../../../../infra/db/sequelize/repositories/example.repository';
-import { GetExampleUseCase } from '../delete-example.use-case';
+import { GetExampleUseCase } from '../../get-example/get-example.use-case';
 
 describe('GetExampleUseCase Integration Tests', () => {
   let useCase: GetExampleUseCase;
