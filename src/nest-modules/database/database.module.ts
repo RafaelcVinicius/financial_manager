@@ -7,8 +7,10 @@ import FinanceModel from '../../@core/finances/infra/db/sequelize/models/finance
 import { UnitOfWorkSequelize } from '../../@core/@shared/infra/db/sequelize/unit-of-work-sequelize';
 import StockModel from '../../@core/stocks/infra/db/sequelize/models/stock.model';
 import ExampleModel from '../../@core/examples/infra/db/sequelize/models/example.model';
+import BondModel from '../../@core/bonds/infra/db/sequelize/models/bond.model';
+import CoinModel from '../../@core/coins/infra/db/sequelize/models/coin.model';
 
-const models = [FinanceModel, StockModel, ExampleModel];
+const models = [FinanceModel, StockModel, ExampleModel, BondModel, CoinModel];
 
 @Global()
 @Module({

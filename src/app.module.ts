@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FinancesModule } from './nest-modules/finances/finances.module';
 import { ConfigModule } from './nest-modules/config/config.module';
@@ -10,6 +9,7 @@ import { EventsModule } from './nest-modules/events/events.module';
 import { RoutersModule } from './nest-modules/routers/routers.module';
 import { StocksModule } from './nest-modules/stocks/stock.module';
 import { BondsModule } from './nest-modules/bonds/bonds.module';
+import { CoinsModule } from './nest-modules/coins/coins.module';
 
 @Module({
   imports: [
@@ -22,8 +22,8 @@ import { BondsModule } from './nest-modules/bonds/bonds.module';
     FinancesModule,
     StocksModule,
     BondsModule,
+    CoinsModule,
   ],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

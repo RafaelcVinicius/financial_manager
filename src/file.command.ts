@@ -2,6 +2,8 @@ import { Command, CommandRunner, Option } from 'nest-commander';
 import * as fs from 'fs';
 import * as path from 'path';
 
+// command npx ts-node ./src/cli.ts create-file --name="name"
+
 interface FileOptions {
   name: string;
   names: string;
@@ -18,7 +20,7 @@ export class CreateFileCommand extends CommandRunner {
     this.moduleClassName =
       this.moduleName.charAt(0).toUpperCase() + this.moduleName.slice(1);
 
-    // this.generateCore();
+    this.generateCore();
 
     this.generateModule();
   }

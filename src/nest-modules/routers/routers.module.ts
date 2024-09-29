@@ -3,6 +3,7 @@ import { RouterModule as NestRouterModule } from '@nestjs/core';
 import { FinancesModule } from '../finances/finances.module';
 import { StocksModule } from '../stocks/stock.module';
 import { BondsModule } from '../bonds/bonds.module';
+import { CoinsModule } from '../coins/coins.module';
 
 @Global()
 @Module({})
@@ -23,6 +24,10 @@ export class RoutersModule extends NestRouterModule {
           {
             path: 'bonds',
             module: BondsModule,
+          },
+          {
+            path: 'coins',
+            module: CoinsModule,
           },
         ],
       },
