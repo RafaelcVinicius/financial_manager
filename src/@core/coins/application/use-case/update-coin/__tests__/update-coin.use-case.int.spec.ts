@@ -30,14 +30,17 @@ describe('UpdateCoinUseCase Integration Tests', () => {
 
     await useCase.execute({
       id: entity.id.value,
-      value: 10,
+      code: 'EHT',
     });
 
     const model = await repository.findById(entity.id);
 
     expect(model!.toJSON()).toMatchObject({
       id: entity.id.value,
-      value: 10,
+      name: entity.name,
+      code: 'EHT',
+      quantity: entity.quantity,
+      unit_price: entity.unit_price,
     });
   });
 });

@@ -11,7 +11,10 @@ describe('CoinOutputMapper Unit Tests', () => {
 
     expect(output).toStrictEqual({
       id: entity.id.value,
-      value: 15000,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.12345612,
+      unit_price: 90000,
       created_at: entity.created_at,
       updated_at: entity.updated_at,
     });

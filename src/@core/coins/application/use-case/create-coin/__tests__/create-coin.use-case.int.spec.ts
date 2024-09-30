@@ -24,36 +24,57 @@ describe('CreateCoinUseCase Integration Tests', () => {
   });
 
   it('should create a coin', async () => {
-    let output = await useCase.execute({ value: 741 });
+    let output = await useCase.execute({
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.789456,
+      unit_price: 90000,
+    });
     let entity = await repository.findById(new Uuid(output.id));
 
     expect(output).toStrictEqual({
       id: entity!.id.value,
-      value: 741,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.789456,
+      unit_price: 90000,
       created_at: undefined,
       updated_at: undefined,
     });
 
     output = await useCase.execute({
-      value: 789,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.123456,
+      unit_price: 90000,
     });
 
     entity = await repository.findById(new Uuid(output.id));
 
     expect(output).toStrictEqual({
       id: entity!.id.value,
-      value: 789,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.123456,
+      unit_price: 90000,
       created_at: undefined,
       updated_at: undefined,
     });
 
     output = await useCase.execute({
-      value: 853,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.852963,
+      unit_price: 90000,
     });
+
     entity = await repository.findById(new Uuid(output.id));
     expect(output).toStrictEqual({
       id: entity!.id.value,
-      value: 853,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.852963,
+      unit_price: 90000,
       created_at: undefined,
       updated_at: undefined,
     });

@@ -19,24 +19,38 @@ describe('CreateCoinUseCase Unit Tests', () => {
 
   it('should create a coins', async () => {
     const spyInsert = jest.spyOn(repository, 'create');
-    let output = await useCase.execute({ value: 321 });
+    let output = await useCase.execute({
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.1789,
+      unit_price: 90000,
+    });
 
     expect(spyInsert).toHaveBeenCalledTimes(1);
     expect(output).toStrictEqual({
       id: repository.items[0].id.value,
-      value: 321,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.1789,
+      unit_price: 90000,
       created_at: repository.items[0].created_at,
       updated_at: repository.items[0].updated_at,
     });
 
     output = await useCase.execute({
-      value: 852,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.123456,
+      unit_price: 90000,
     });
 
     expect(spyInsert).toHaveBeenCalledTimes(2);
     expect(output).toStrictEqual({
       id: repository.items[1].id.value,
-      value: 852,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.123456,
+      unit_price: 90000,
       created_at: repository.items[1].created_at,
       updated_at: repository.items[1].updated_at,
     });

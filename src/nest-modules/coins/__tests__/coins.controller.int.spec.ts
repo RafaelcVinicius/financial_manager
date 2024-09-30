@@ -3,10 +3,7 @@ import { CoinsController } from '../coins.controller';
 import { CoinsModule } from '../coins.module';
 import { COIN_PROVIDERS } from '../coins.provider';
 import { DeleteCoinUseCase } from '../../../@core/coins/application/use-case/delete-coin/delete-coin.use-case';
-import {
-  CreateCoinFixture,
-  UpdateCoinFixture,
-} from '../testing/coin-fixture';
+import { CreateCoinFixture, UpdateCoinFixture } from '../testing/coin-fixture';
 import { Uuid } from '../../../@core/@shared/domain/value-objects/uuid.vo';
 import { CoinOutputMapper } from '../../../@core/coins/application/common/coin.output';
 import { CoinPresenter } from '../coins.presenter';
@@ -74,7 +71,10 @@ describe('CoinsController Integration Tests', () => {
 
       expect(entity!.toJSON()).toMatchObject({
         id: presenter.id,
-        value: presenter.value,
+        name: presenter.name,
+        code: presenter.code,
+        quantity: presenter.quantity,
+        unit_price: presenter.unit_price,
         created_at: presenter.created_at,
         updated_at: presenter.updated_at,
       });
@@ -108,7 +108,10 @@ describe('CoinsController Integration Tests', () => {
           id: presenter.id,
           created_at: presenter.created_at,
           updated_at: presenter.updated_at,
-          value: expected.value ?? entityMock.value,
+          name: expected.name ?? entityMock.name,
+          code: expected.code ?? entityMock.code,
+          quantity: expected.quantity ?? entityMock.quantity,
+          unit_price: expected.unit_price ?? entityMock.unit_price,
         });
         const output = CoinOutputMapper.toOutput(entity!);
         expect(presenter).toEqual(new CoinPresenter(output));
@@ -134,7 +137,10 @@ describe('CoinsController Integration Tests', () => {
     const presenter = await controller.get(entity.id.value);
 
     expect(presenter.id).toBe(entity.id.value);
-    expect(presenter.value).toBe(entity.value);
+    expect(presenter.name).toBe(entity.name);
+    expect(presenter.code).toBe(entity.code);
+    expect(presenter.quantity).toBe(entity.quantity);
+    expect(presenter.unit_price).toBe(entity.unit_price);
     expect(presenter.created_at).toStrictEqual(entity.created_at);
   });
 });

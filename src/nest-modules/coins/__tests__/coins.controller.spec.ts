@@ -5,10 +5,7 @@ import { ListCoinsOutput } from '../../../@core/coins/application/use-case/list-
 import { UpdateCoinInput } from '../../../@core/coins/application/use-case/update-coin/update-coin.use-case.input';
 import { CreateCoinDto } from '../dto/create-coin.dto';
 import { CoinsController } from '../coins.controller';
-import {
-  CoinPresenter,
-  CoinPresenterCollection,
-} from '../coins.presenter';
+import { CoinPresenter, CoinPresenterCollection } from '../coins.presenter';
 
 describe('CoinsController Unit Tests', () => {
   let controller: CoinsController;
@@ -21,7 +18,10 @@ describe('CoinsController Unit Tests', () => {
     //Arrange
     const output: CreateCoinOutput = {
       id: '9366b7dc-2d71-4799-b91c-c64adb205104',
-      value: 150,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.123456,
+      unit_price: 90000,
       created_at: new Date(),
       updated_at: new Date(),
     };
@@ -32,7 +32,10 @@ describe('CoinsController Unit Tests', () => {
     //@ts-expect-error defined part of methods
     controller['createUseCase'] = mockCreateUseCase;
     const input: CreateCoinDto = {
-      value: 15,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.178945,
+      unit_price: 15000,
     };
 
     //Act
@@ -48,7 +51,10 @@ describe('CoinsController Unit Tests', () => {
     const id = '9366b7dc-2d71-4799-b91c-c64adb205104';
     const output: CoinOutput = {
       id,
-      value: 15,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.123456,
+      unit_price: 90000,
       created_at: new Date(),
       updated_at: new Date(),
     };
@@ -58,7 +64,10 @@ describe('CoinsController Unit Tests', () => {
     //@ts-expect-error defined part of methods
     controller['updateUseCase'] = mockUpdateUseCase;
     const input: Omit<UpdateCoinInput, 'id'> = {
-      value: 15,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 1.9856,
+      unit_price: 8000,
     };
     const presenter = await controller.update(id, input);
     expect(mockUpdateUseCase.execute).toHaveBeenCalledWith({ id, ...input });
@@ -84,7 +93,10 @@ describe('CoinsController Unit Tests', () => {
     const id = '9366b7dc-2d71-4799-b91c-c64adb205104';
     const output: CoinOutput = {
       id,
-      value: 15,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.023456,
+      unit_price: 150000,
       created_at: new Date(),
       updated_at: new Date(),
     };
@@ -104,7 +116,10 @@ describe('CoinsController Unit Tests', () => {
       items: [
         {
           id: '9366b7dc-2d71-4799-b91c-c64adb205104',
-          value: 15,
+          name: 'Bitcoin',
+          code: 'BTC',
+          quantity: 0.123456,
+          unit_price: 90000,
           created_at: new Date(),
           updated_at: new Date(),
         },

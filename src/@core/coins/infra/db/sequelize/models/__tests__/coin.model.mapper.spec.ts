@@ -11,7 +11,10 @@ describe('Coin model mapper tests', () => {
   it('Should map to model', () => {
     const model = CoinModel.build({
       ...entity.toJSON(),
-      value: entity.value.toBigint(),
+      name: entity.name,
+      code: entity.code,
+      quantity: entity.quantity,
+      unit_price: entity.unit_price,
       deleted_at: undefined,
     });
 
@@ -23,7 +26,10 @@ describe('Coin model mapper tests', () => {
   it('Should map to entity', () => {
     const model = CoinModel.build({
       ...entity.toJSON(),
-      value: entity.value.toBigint(),
+      name: entity.name,
+      code: entity.code,
+      quantity: entity.quantity,
+      unit_price: entity.unit_price,
     });
 
     const modelMappedToentity = CoinModelMapper.toEntity(model);

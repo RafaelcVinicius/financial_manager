@@ -12,7 +12,10 @@ describe('Coin model integration tests', () => {
     const attributesMap = CoinModel.getAttributes();
 
     expect(attributesMap).toHaveProperty('id');
-    expect(attributesMap).toHaveProperty('value');
+    expect(attributesMap).toHaveProperty('name');
+    expect(attributesMap).toHaveProperty('code');
+    expect(attributesMap).toHaveProperty('quantity');
+    expect(attributesMap).toHaveProperty('unit_price');
     expect(attributesMap).toHaveProperty('created_at');
     expect(attributesMap).toHaveProperty('updated_at');
     expect(attributesMap).toHaveProperty('deleted_at');

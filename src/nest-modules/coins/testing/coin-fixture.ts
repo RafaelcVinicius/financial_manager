@@ -1,6 +1,6 @@
 import { CoinEntity } from '../../../@core/coins/domain/entities/coin.entity';
 
-const _keysInResponse = ['id', 'value', 'created_at'];
+const _keysInResponse = ['id', 'name', 'code', 'created_at'];
 
 export class GetCoinFixture {
   static keysInResponse = _keysInResponse;
@@ -14,10 +14,16 @@ export class CreateCoinFixture {
     return [
       {
         send_data: {
-          value: faker.value,
+          name: faker.name,
+          code: faker.code,
+          quantity: faker.quantity,
+          unit_price: faker.unit_price,
         },
         expected: {
-          value: faker.value,
+          name: faker.name,
+          code: faker.code,
+          quantity: faker.quantity,
+          unit_price: faker.unit_price,
         },
       },
     ];
@@ -103,7 +109,10 @@ export class CreateCoinFixture {
     return {
       NAME_TOO_LONG: {
         send_data: {
-          name: faker.value,
+          name: faker.name,
+          code: faker.code,
+          quantity: faker.quantity,
+          unit_price: faker.unit_price,
         },
         expected: {
           message: ['name must be shorter than or equal to 255 characters'],
@@ -122,10 +131,16 @@ export class UpdateCoinFixture {
     return [
       {
         send_data: {
-          value: faker.value,
+          name: faker.name,
+          code: faker.code,
+          quantity: faker.quantity,
+          unit_price: faker.unit_price,
         },
         expected: {
-          value: faker.value,
+          name: faker.name,
+          code: faker.code,
+          quantity: faker.quantity,
+          unit_price: faker.unit_price,
         },
       },
     ];
@@ -169,10 +184,13 @@ export class UpdateCoinFixture {
     return {
       NAME_TOO_LONG: {
         send_data: {
-          value: faker.value,
+          name: faker.name.repeat(101),
+          code: faker.code,
+          quantity: faker.quantity,
+          unit_price: faker.unit_price,
         },
         expected: {
-          message: ['name must be shorter than or equal to 255 characters'],
+          message: ['name must be shorter than or equal to 100 characters'],
           ...defaultExpected,
         },
       },
@@ -271,7 +289,7 @@ export class ListCategoriesFixture {
         send_data: {
           page: 2,
           per_page: 2,
-          sort: 'value',
+          sort: 'code',
           filter: 'a',
         },
         expected: {

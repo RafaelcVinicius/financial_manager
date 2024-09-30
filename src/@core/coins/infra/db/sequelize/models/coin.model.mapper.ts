@@ -6,7 +6,10 @@ export class CoinModelMapper {
   static toModel(entity: CoinEntity) {
     return {
       id: entity.id.value,
-      value: entity.value.toBigint(),
+      name: entity.name,
+      code: entity.code,
+      quantity: entity.quantity,
+      unit_price: entity.unit_price.toBigint(),
       created_at: entity.created_at,
       updated_at: entity.updated_at,
       deleted_at: entity.deleted_at,
@@ -16,7 +19,10 @@ export class CoinModelMapper {
   static toEntity(model: CoinModel) {
     return new CoinEntity({
       id: model.id,
-      value: parseFloat(model.value.toString()).toDecimal(),
+      name: model.name,
+      code: model.code,
+      quantity: parseFloat(model.quantity.toString()),
+      unit_price: parseFloat(model.unit_price.toString()).toDecimal(),
       created_at: model.created_at,
       updated_at: model.updated_at,
       deleted_at: model.deleted_at,

@@ -26,14 +26,20 @@ describe('UpdateCoinUseCase Unit Tests', () => {
   it('should update a coin', async () => {
     await useCase.execute({
       id: entity.id.value,
-      value: 10,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 1.789456,
+      unit_price: 15000,
     });
 
     const model = await repository.findById(entity.id);
 
     expect(model!.toJSON()).toMatchObject({
       id: entity.id.value,
-      value: 10,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 1.789456,
+      unit_price: 15000,
     });
   });
 });

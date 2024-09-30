@@ -1,13 +1,28 @@
-import { IsNotEmpty, IsNumber, validateSync } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, validateSync } from 'class-validator';
 
 export type CreateCoinInputConstructorProps = {
-  value: number;
+  code: string;
+  name: string;
+  quantity: number;
+  unit_price: number;
 };
 
 export class CreateCoinInput {
+  @IsString()
+  @IsNotEmpty()
+  code: string;
+
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
   @IsNumber()
   @IsNotEmpty()
-  value: number;
+  quantity: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  unit_price: number;
 
   constructor(props: CreateCoinInputConstructorProps) {
     if (!props) return;

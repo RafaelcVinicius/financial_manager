@@ -5,7 +5,10 @@ import { CoinValidator } from '../validations/coin.validator';
 
 export type CoinEntityType = {
   id?: string;
-  value: number;
+  name: string;
+  code: string;
+  quantity: number;
+  unit_price: number;
   created_at?: Date;
   updated_at?: Date;
   deleted_at?: Date;
@@ -13,7 +16,10 @@ export type CoinEntityType = {
 
 export class CoinEntity extends Entity {
   id: Uuid;
-  value: number;
+  name: string;
+  code: string;
+  quantity: number;
+  unit_price: number;
   created_at: Date;
   updated_at: Date;
   deleted_at: Date;
@@ -33,7 +39,10 @@ export class CoinEntity extends Entity {
 
   static mock() {
     return new this({
-      value: 15000,
+      name: 'Bitcoin',
+      code: 'BTC',
+      quantity: 0.12345612,
+      unit_price: 90000,
       created_at: new Date(),
       updated_at: new Date(),
     });
@@ -42,7 +51,10 @@ export class CoinEntity extends Entity {
   toJSON() {
     return {
       id: this.id.value,
-      value: this.value,
+      name: this.name,
+      code: this.code,
+      quantity: this.quantity,
+      unit_price: this.unit_price,
       created_at: this.created_at,
       updated_at: this.updated_at,
     };
@@ -52,10 +64,31 @@ export class CoinEntity extends Entity {
     return CoinValidator.create().validate(this.notification, this, fields);
   }
 
-  changeValue(value: number) {
-    if (!value) throw new BadRequestException();
+  changeCode(code: string) {
+    if (!code) throw new BadRequestException();
 
-    this.value = value;
-    this.validate(['value']);
+    this.code = code;
+    this.validate(['code']);
+  }
+
+  changeName(name: string) {
+    if (!name) throw new BadRequestException();
+
+    this.name = name;
+    this.validate(['name']);
+  }
+
+  changeQuantity(quantity: number) {
+    if (!quantity) throw new BadRequestException();
+
+    this.quantity = quantity;
+    this.validate(['quantity']);
+  }
+
+  changeUnitPrice(unit_price: number) {
+    if (!unit_price) throw new BadRequestException();
+
+    this.unit_price = unit_price;
+    this.validate(['unit_price']);
   }
 }

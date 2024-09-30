@@ -21,7 +21,10 @@ export class UpdateCoinUseCase
 
       if (!entity) throw new NotFoundError(input.id, CoinEntity);
 
-      input.value && entity.changeValue(input.value);
+      input.code && entity.changeCode(input.code);
+      input.name && entity.changeName(input.name);
+      input.quantity && entity.changeQuantity(input.quantity);
+      input.unit_price && entity.changeUnitPrice(input.unit_price);
 
       await this._coinRepo.update(entity);
 

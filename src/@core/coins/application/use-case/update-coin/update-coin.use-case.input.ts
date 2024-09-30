@@ -2,14 +2,17 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  IsString,
   IsUUID,
   validateSync,
 } from 'class-validator';
 
 export type UpdateCoinInputConstructorProps = {
   id: string;
-  value?: number;
-  description?: string;
+  code: string;
+  name: string;
+  quantity: number;
+  unit_price: number;
 };
 
 export class UpdateCoinInput {
@@ -17,9 +20,25 @@ export class UpdateCoinInput {
   @IsNotEmpty()
   id: string;
 
+  @IsString()
+  @IsOptional()
+  @IsNotEmpty()
+  code?: string;
+
+  @IsString()
+  @IsOptional()
+  @IsNotEmpty()
+  name?: string;
+
   @IsNumber()
   @IsOptional()
-  value?: number;
+  @IsNotEmpty()
+  quantity?: number;
+
+  @IsNumber()
+  @IsOptional()
+  @IsNotEmpty()
+  unit_price?: number;
 
   constructor(props: UpdateCoinInputConstructorProps) {
     if (!props) return;

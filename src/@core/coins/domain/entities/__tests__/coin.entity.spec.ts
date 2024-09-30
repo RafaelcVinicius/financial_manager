@@ -6,6 +6,9 @@ describe('Coin unit tests', () => {
   it('Should create a new entity entity', () => {
     expect(entity).toBeDefined();
     expect(entity).toBeDefined();
-    expect(entity.value).toBeDefined();
+    expect(entity.name).toBeDefined();
+    expect(entity.code).toBeDefined();
+    expect(entity.quantity).toBeDefined();
+    expect(entity.unit_price).toBeDefined();
   }, 30000);
 });
