@@ -23,8 +23,6 @@ export class UpdateCoinUseCase
 
       input.code && entity.changeCode(input.code);
       input.name && entity.changeName(input.name);
-      input.quantity && entity.changeQuantity(input.quantity);
-      input.unit_price && entity.changeUnitPrice(input.unit_price);
 
       await this._coinRepo.update(entity);
 

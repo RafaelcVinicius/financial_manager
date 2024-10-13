@@ -7,8 +7,6 @@ export class CoinPresenter {
   id: string;
   name: string;
   code: string;
-  quantity: number;
-  unit_price: number;
 
   @Transform(({ value }: { value: Date }) => value?.toISOString())
   created_at: Date;

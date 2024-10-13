@@ -9,6 +9,7 @@ import FinanceModel from '../models/finance.model';
 import { NotFoundError } from '../../../../../@shared/domain/error/not-found.error';
 import { Uuid } from '../../../../../@shared/domain/value-objects/uuid.vo';
 import { IUnitOfWork } from '../../../../../@shared/domain/repository/unit-of-work.interface';
+import CoinModel from '../../../../../coins/infra/db/sequelize/models/coin.model';
 
 export class FinanceRepository implements IFinanceRepository {
   sortableFields: string[] = ['name', 'created_at'];
@@ -20,13 +21,16 @@ export class FinanceRepository implements IFinanceRepository {
 
   async create(entity: FinanceEntity): Promise<void> {
     const modelProps = FinanceModelMapper.toModel(entity);
-    await this.model.create(modelProps);
+    await this.model.create(modelProps, {
+      transaction: this.uow.getTransaction(),
+    });
   }
 
   async update(entity: FinanceEntity): Promise<void> {
     const modelProps = FinanceModelMapper.toModel(entity);
     const [affectedRows] = await this.model.update(modelProps, {
       where: { id: entity.id.value },
+      transaction: this.uow.getTransaction(),
     });
 
     if (affectedRows !== 1) {
@@ -45,13 +49,18 @@ export class FinanceRepository implements IFinanceRepository {
   }
 
   async findById(entity_id: Uuid): Promise<FinanceEntity | null> {
-    const model = await this.model.findByPk(entity_id.value);
+    const model = await this.model.findByPk(entity_id.value, {
+      include: [{ model: CoinModel }],
+      transaction: this.uow.getTransaction(),
+    });
 
     return model ? FinanceModelMapper.toEntity(model) : null;
   }
 
   async findAll(): Promise<FinanceEntity[]> {
-    const models = await this.model.findAll();
+    const models = await this.model.findAll({
+      include: [{ model: CoinModel }],
+    });
     return models.map((model) => {
       return FinanceModelMapper.toEntity(model);
     });
@@ -69,6 +78,7 @@ export class FinanceRepository implements IFinanceRepository {
         : { order: [['created_at', 'desc']] }),
       offset,
       limit,
+      include: [{ model: CoinModel }],
     });
 
     return new FinanceSearchResult({

@@ -2,11 +2,22 @@ import { BadRequestException } from '@nestjs/common';
 import { Entity } from '../../../@shared/domain/entity';
 import { Uuid } from '../../../@shared/domain/value-objects/uuid.vo';
 import { FinanceValidator } from '../validations/finance.validator';
+import { CoinEntity } from '../../../coins/domain/entities/coin.entity';
+
+export enum OrigemType {
+  deposit = 'deposit',
+  transfer = 'transfer',
+  bonds = 'bonds',
+  stocks = 'stocks',
+}
 
 export type FinanceEntityType = {
   id?: string;
   value: number;
+  coin: CoinEntity;
   description: string;
+  origem: string;
+  origem_id: string;
   created_at?: Date;
   updated_at?: Date;
   deleted_at?: Date;
@@ -15,7 +26,10 @@ export type FinanceEntityType = {
 export class FinanceEntity extends Entity {
   id: Uuid;
   value: number;
+  coin: CoinEntity;
   description: string;
+  origem: OrigemType;
+  origem_id: Uuid;
   created_at: Date;
   updated_at: Date;
   deleted_at: Date;
@@ -23,12 +37,10 @@ export class FinanceEntity extends Entity {
   constructor(props: FinanceEntityType) {
     super();
 
+    Object.assign(this, props);
+
     this.id = new Uuid(props.id);
-    this.value = props.value;
-    this.description = props.description;
-    this.created_at = props.created_at;
-    this.updated_at = props.updated_at;
-    this.deleted_at = props.deleted_at;
+    this.origem_id = new Uuid(props.origem_id);
 
     this.validate();
   }
@@ -40,7 +52,10 @@ export class FinanceEntity extends Entity {
   static mock() {
     return new this({
       value: 15000,
-      description: 'Teste',
+      description: 'mock finance entity',
+      coin: CoinEntity.mock(),
+      origem: OrigemType.deposit,
+      origem_id: new Uuid().value,
       created_at: new Date(),
       updated_at: new Date(),
       deleted_at: null,
@@ -52,6 +67,9 @@ export class FinanceEntity extends Entity {
       id: this.id.value,
       value: this.value,
       description: this.description,
+      coin: this.coin.toJSON(),
+      origem: this.origem,
+      origem_id: this.origem_id,
       created_at: this.created_at,
       updated_at: this.updated_at,
     };
@@ -59,13 +77,6 @@ export class FinanceEntity extends Entity {
 
   validate(fields?: string[]) {
     return FinanceValidator.create().validate(this.notification, this, fields);
-  }
-
-  changeValue(value: number) {
-    if (!value) throw new BadRequestException();
-
-    this.value = value;
-    this.validate(['value']);
   }
 
   changeDescription(description: string) {

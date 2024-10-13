@@ -16,6 +16,18 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
+    coin_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    origem: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+    },
+    origem_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,

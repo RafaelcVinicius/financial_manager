@@ -3,8 +3,6 @@ import { IsNotEmpty, IsNumber, IsString, validateSync } from 'class-validator';
 export type CreateCoinInputConstructorProps = {
   code: string;
   name: string;
-  quantity: number;
-  unit_price: number;
 };
 
 export class CreateCoinInput {

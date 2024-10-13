@@ -7,8 +7,6 @@ export type CoinEntityType = {
   id?: string;
   name: string;
   code: string;
-  quantity: number;
-  unit_price: number;
   created_at?: Date;
   updated_at?: Date;
   deleted_at?: Date;
@@ -18,8 +16,6 @@ export class CoinEntity extends Entity {
   id: Uuid;
   name: string;
   code: string;
-  quantity: number;
-  unit_price: number;
   created_at: Date;
   updated_at: Date;
   deleted_at: Date;
@@ -41,8 +37,6 @@ export class CoinEntity extends Entity {
     return new this({
       name: 'Bitcoin',
       code: 'BTC',
-      quantity: 0.12345612,
-      unit_price: 90000,
       created_at: new Date(),
       updated_at: new Date(),
     });
@@ -53,8 +47,6 @@ export class CoinEntity extends Entity {
       id: this.id.value,
       name: this.name,
       code: this.code,
-      quantity: this.quantity,
-      unit_price: this.unit_price,
       created_at: this.created_at,
       updated_at: this.updated_at,
     };
@@ -76,19 +68,5 @@ export class CoinEntity extends Entity {
 
     this.name = name;
     this.validate(['name']);
-  }
-
-  changeQuantity(quantity: number) {
-    if (!quantity) throw new BadRequestException();
-
-    this.quantity = quantity;
-    this.validate(['quantity']);
-  }
-
-  changeUnitPrice(unit_price: number) {
-    if (!unit_price) throw new BadRequestException();
-
-    this.unit_price = unit_price;
-    this.validate(['unit_price']);
   }
 }

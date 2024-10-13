@@ -8,5 +8,8 @@ describe('Finance unit tests', () => {
     expect(finance).toBeDefined();
     expect(finance.value).toBeDefined();
     expect(finance.description).toBeDefined();
+    expect(finance.coin).toBeDefined();
+    expect(finance.origem).toBeDefined();
+    expect(finance.origem_id).toBeDefined();
   }, 30000);
 });
